@@ -29,7 +29,6 @@ public class main_node: SKNode {
         self.input_one = input_node()
         self.input_two = input_node()
         self.output = input_node()
-    
         
         self.is_chained = nil
         self.gate = input_node()
@@ -48,13 +47,13 @@ public class main_node: SKNode {
         
         let input_y: CGFloat = (named != "not") ? magic_number : 0.0
         
-        self.input_one.position = CGPoint(x: (5 * -input_one.size.width) / 4, y: input_y)
+        self.input_one.position = CGPoint(x: ((5 * -input_one.size.width) / 4) + 5, y: input_y)
         self.input_one.name = "input_one"
         self.input_one.add_physics(retangle_of: self.input_one.size)
         self.addChild(input_one)
         
         if named != "not" {
-            self.input_two.position = CGPoint(x: (5 * -input_two.size.width) / 4, y: -magic_number)
+            self.input_two.position = CGPoint(x: ((5 * -input_two.size.width) / 4) + 5, y: -magic_number)
             self.input_two.name = "input_two"
             self.input_two.add_physics(retangle_of: self.input_two.size)
             self.addChild(input_two)
@@ -88,17 +87,17 @@ public class main_node: SKNode {
         var value_output = false
         
         switch logic {
-            case .and:
-                value_output = value_input_one && value_input_two
+        case .and:
+            value_output = value_input_one && value_input_two
             
-            case .or:
-                value_output = value_input_one || value_input_two
+        case .or:
+            value_output = value_input_one || value_input_two
             
-            case .not:
-                value_output = !value_input_one
+        case .not:
+            value_output = !value_input_one
             
-            default:
-                break
+        default:
+            break
         }
         
         output.change_input(to: value_output)
@@ -167,24 +166,24 @@ public class main_node: SKNode {
         if let _ = self.is_chained {
             father?.output.input_label.removeFromParent()
             
-            if self.name == "not" {
-                position.x = father_frame!.maxX + (self_size.width / 2) - 6
+            if self.name == "main_not" {
+                position.x = father_frame!.maxX + (self_size.width / 2) - 10
                 position.y = output_pos!.y
                 
             } else {
                 switch is_chained! {
-                    case .one:
-                        self.input_one.change_input_type(chained: true)
-                        position.x = father_frame!.maxX + (self_size.width / 2) - 6
-                        position.y = output_pos!.y - 3 * (magic_height / 2) + 7.5
+                case .one:
+                    self.input_one.change_input_type(chained: true)
+                    position.x = father_frame!.maxX + (self_size.width / 2) - 10
+                    position.y = output_pos!.y - 3 * (magic_height / 2) + 7
                     
-                    case .two:
-                        self.input_two.change_input_type(chained: true)
-                        position.x = father_frame!.maxX + (self_size.width / 2) - 6
-                        position.y = output_pos!.y + 3 * (magic_height / 2) - 7.5
+                case .two:
+                    self.input_two.change_input_type(chained: true)
+                    position.x = father_frame!.maxX + (self_size.width / 2) - 10
+                    position.y = output_pos!.y + 3 * (magic_height / 2) - 7
                     
-                    default:
-                        break
+                default:
+                    break
                     
                 }
             }
@@ -192,24 +191,24 @@ public class main_node: SKNode {
         } else if let _ = self.child {
             self.output.input_label.removeFromParent()
             
-            if child?.node.name == "not" {
-                position.x = child!.node.frame.minX - (self_size.width) + 2
+            if child?.node.name == "main_not" {
+                position.x = child!.node.frame.minX - (self_size.width) + 10
                 position.y = child!.node.position.y
                 
             } else {
                 switch child!.input {
-                    case .one:
-                        child?.node.input_one.change_input_type(chained: true)
-                        position.x = child!.node.frame.minX - (self_size.width) + 2
-                        position.y = child!.node.position.y + 3 * (magic_height / 2) - 7.5
+                case .one:
+                    child?.node.input_one.change_input_type(chained: true)
+                    position.x = child!.node.frame.minX - (self_size.width) + 7
+                    position.y = child!.node.position.y + 3 * (magic_height / 2) - 6.5
                     
-                    case .two:
-                        child?.node.input_two.change_input_type(chained: true)
-                        position.x = child!.node.frame.minX - (self_size.width) + 2
-                        position.y = child!.node.position.y - 3 * (magic_height / 2) + 7.5
+                case .two:
+                    child?.node.input_two.change_input_type(chained: true)
+                    position.x = child!.node.frame.minX - (self_size.width) + 7
+                    position.y = child!.node.position.y - 3 * (magic_height / 2) + 6.5
                     
-                    default:
-                        break
+                default:
+                    break
                     
                 }
             }
@@ -240,7 +239,6 @@ public class input_node: SKSpriteNode {
         var image_name: String = ""
         var name_array = self.texture_name.split(separator: "_")
         
-        //swift cu não deixa usar -1 como indice
         name_array[name_array.count - 1] = String.SubSequence("\(bool)")
         image_name = name_array.joined(separator: "_")
         self.texture_name = image_name
@@ -252,22 +250,20 @@ public class input_node: SKSpriteNode {
     public func change_input_type(chained: Bool) {
         self.chained = chained
         let image_name: String = chained ? "\(self.name ?? "")_chained_true" : "true"
+        let label_pos: CGPoint = chained ? CGPoint(x: 10, y: -10) : CGPoint(x: -10, y: 10)
         let pos_y: CGFloat
         
         let texture = SKTexture(imageNamed: image_name)
         self.texture_name = image_name
-    
+        
         self.texture = texture
         self.size = texture.size()
         
-        if self.name!.contains("one") && chained {
-            self.input_label.position = CGPoint(x: -10, y: 10)
-            
-        } else if self.name!.contains("two") && chained {
-            self.input_label.position = CGPoint(x: 10, y: -10)
+        if self.name!.contains("two") && chained {
+            self.input_label.position = CGPoint(x: -10, y: 25)
             
         }
-
+        
         pos_y = chained ? magic_height : magic_number
         self.position.y = self.name!.contains("two") ? -pos_y : pos_y
         self.add_physics(retangle_of: texture.size())
@@ -277,6 +273,7 @@ public class input_node: SKSpriteNode {
         let pos = chained ? CGPoint(x: 10, y: -20) : CGPoint(x: -10, y: 10)
         input_label = SKLabelNode(text: "\(value!)")
         input_label.position = pos
+        input_label.fontSize = 15
         self.addChild(input_label)
     }
     

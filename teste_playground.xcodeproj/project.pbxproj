@@ -15,6 +15,7 @@
 		4E11E940205AFEBC005477BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E11E93E205AFEBC005477BF /* LaunchScreen.storyboard */; };
 		4E11E948205B5957005477BF /* MainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E11E947205B5957005477BF /* MainNode.swift */; };
 		4E47CA0C205D5B660077EFE4 /* Extensions+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E47CA0B205D5B660077EFE4 /* Extensions+Helpers.swift */; };
+		4EC73025207041F50016E2E2 /* Logic Circuits.playgroundbook in Resources */ = {isa = PBXBuildFile; fileRef = 4EC73024207041F50016E2E2 /* Logic Circuits.playgroundbook */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4E11E941205AFEBC005477BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E11E947205B5957005477BF /* MainNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNode.swift; sourceTree = "<group>"; };
 		4E47CA0B205D5B660077EFE4 /* Extensions+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Helpers.swift"; sourceTree = "<group>"; };
+		4EC73024207041F50016E2E2 /* Logic Circuits.playgroundbook */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Logic Circuits.playgroundbook"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 		4E11E923205AFEBC005477BF = {
 			isa = PBXGroup;
 			children = (
+				4EC73024207041F50016E2E2 /* Logic Circuits.playgroundbook */,
 				4E11E92E205AFEBC005477BF /* teste_playground */,
 				4E11E92D205AFEBC005477BF /* Products */,
 			);
@@ -135,6 +138,7 @@
 				4E11E93B205AFEBC005477BF /* Main.storyboard in Resources */,
 				4E11E93D205AFEBC005477BF /* Assets.xcassets in Resources */,
 				4E11E940205AFEBC005477BF /* LaunchScreen.storyboard in Resources */,
+				4EC73025207041F50016E2E2 /* Logic Circuits.playgroundbook in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
